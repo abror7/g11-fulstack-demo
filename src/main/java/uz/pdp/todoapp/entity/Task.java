@@ -2,6 +2,7 @@ package uz.pdp.todoapp.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Task {
 
     @Id
@@ -24,6 +26,11 @@ public class Task {
     private String description;
 
     @CreationTimestamp
-    @Column(insertable = false, nullable = false)
-    private Timestamp timestamp;
+    @Column(insertable = false)
+    private Timestamp createdAt;
+
+    public Task(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 }
